@@ -45,18 +45,18 @@
 </section>
 
 <main class="container mt-5">
-    <form>
+    <form id="bookingForm">
         <div class="mb-4">
             <label for="djMultipleSelect" class="form-label">Choose DJ/DJ's</label>
             <select multiple class="form-select" id="djMultipleSelect">
-                <option value="1">DJ JSK</option>
-                <option value="2">DJ SOUNDZ</option>
-                <option value="3">DJ FLUX</option>
+                <option value="DJ JSK">DJ JSK</option>
+                <option value="DJ SOUNDZ">DJ SOUNDZ</option>
+                <option value="DJ FLUX">DJ FLUX</option>
             </select>
             <label for="eventSelection" class="form-label">Select Event Type</label>
             <select class="form-select" id="eventSelection">
-                <option value="1">Social Event</option>
-                <option value="2">Corporate Event</option>
+                <option value="Social Event">Social Event</option>
+                <option value="Corporate Event">Corporate Event</option>
             </select>
             <label for="timeInput" class="form-label">Event Time</label>
             <input type="time" class="form-control" id="timeInput">
@@ -118,6 +118,19 @@
         <p> 2024 Amplify Entertainment. All rights reserved.</p>
     </div>
 </footer>
+
+<script>
+    document.getElementById('bookingForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        localStorage.setItem('dj', JSON.stringify(Array.from(document.getElementById('djMultipleSelect').selectedOptions).map(option => option.value)));
+        localStorage.setItem('event', document.getElementById('eventSelection').value);
+        localStorage.setItem('time', document.getElementById('timeInput').value);
+        localStorage.setItem('date', document.getElementById('dateInput').value);
+
+        window.location.href = 'bookingConfirmation.html';
+    });
+</script>
 
 </body>
 </html>
